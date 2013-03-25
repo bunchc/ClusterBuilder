@@ -1,6 +1,6 @@
 nodes = {
-    'opencenter'  => [1, 200],
-    'node'   => [3, 201],
+    'opencenter'  => [1, 100],
+    'node'   => [1, 101],
 }
 
 Vagrant.configure("2") do |config|
@@ -16,8 +16,7 @@ Vagrant.configure("2") do |config|
                 box.vm.network :private_network, ip: "172.16.172.#{ip_start+i}", :netmask => "255.255.255.0"
                 box.vm.provision :shell, :path => "#{prefix}.sh"
                 box.vm.provider :vmware_fusion do |v|
-                    v.vmx["memsize"] = 1024
-                    #v.gui = true
+                    v.vmx["memsize"] = 1536
                 end
                 if prefix == 'opencenter'
                   box.vm.network :forwarded_port, guest: 443, host: 4343
